@@ -1,11 +1,11 @@
 import React from 'react'
 
+import Copyright from 'components/atoms/Copyright'
+
 export const Footer: React.FC = () => {
   return (
     <footer className="footer">
-      <small className="footer__copyright">
-        &copy; Copyright Tic Tac Toe. All rights reserved.
-      </small>
+      <Copyright text="&copy; Copyright Tic Tac Toe. All rights reserved." />
     </footer>
   )
 }
