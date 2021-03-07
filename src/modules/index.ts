@@ -1,5 +1,8 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import tictactoe from 'modules/tictactoe';
 
-const reducers = combineReducers({})
+const reducers = combineReducers({
+  tictactoe,
+});
 
-export default reducers
+export default reducers;
