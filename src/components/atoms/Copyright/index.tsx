@@ -1,12 +1,19 @@
-import React from 'react'
+/** @jsxImportSource @emotion/react */
+
+import React from 'react';
+import style from './style';
 
 interface Props {
-  className?: string
-  text: string
+  className?: string;
+  text: string;
 }
 
 const Copyright: React.FC<Props> = ({ className, text }) => {
-  return <small className={className || 'footer__copyright'}>{text}</small>
-}
+  return (
+    <small className={className || 'footer__copyright'} css={style}>
+      {text}
+    </small>
+  );
+};
 
-export default Copyright
+export default Copyright;
