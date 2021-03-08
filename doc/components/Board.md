@@ -6,6 +6,8 @@
 
 - handleClick
   - 各セルをクリックで発火する
+- createBoard
+  - セルの生成
 
 ## props
 
