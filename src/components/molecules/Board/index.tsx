@@ -4,10 +4,13 @@ import React from 'react';
 import style from './style';
 
 import Cell from 'components/atoms/Cell';
+import rules from './rules';
 
 interface Props {
   turnA: boolean;
+  won: boolean;
   changeTurn: () => void;
+  changeWon: () => void;
 }
 
 interface State {
@@ -18,35 +21,76 @@ const initialState: State = {
   points: [[], []],
 };
 
-const Board: React.FC<Props> = ({ turnA, changeTurn }) => {
+const Board: React.FC<Props> = ({ turnA, won, changeTurn, changeWon }) => {
   const [points, setPoints] = React.useState(initialState.points);
 
-  const handleClick = (element: HTMLTableDataCellElement): void => {
-    let index: number;
-    if (turnA == true) {
-      index = 0;
-    } else {
-      index = 1;
+  /**
+   * 各セルをクリックで発火する
+   *
+   * @param setContent  引数に渡した内容をセルに表示する
+   * @param event event
+   */
+  const handleClick = (
+    setContent: React.Dispatch<React.SetStateAction<string>>,
+    event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>,
+  ): void => {
+    const element: HTMLTableDataCellElement = event.target as HTMLTableDataCellElement;
+
+    if (element.textContent == '' && won == false) {
+      let index: number;
+      if (turnA == true) {
+        index = 0;
+        setContent('○');
+      } else {
+        index = 1;
+        setContent('×');
+      }
+      // 得点の追加
+      const clone = JSON.parse(JSON.stringify(points));
+      clone[index].push(Number(element.getAttribute('data-index')));
+      setPoints(clone);
+      // 勝敗の判定
+      checkWon(clone[index]);
     }
-    // 得点の追加
-    const clone = JSON.parse(JSON.stringify(points));
-    clone[index].push(
-      (element.getAttribute('data-index') as unknown) as number,
-    );
-    setPoints(clone);
-    // 勝敗の判定(pointsの追加後に)
-    // ターンの交代
-    changeTurn();
   };
+
+  /**
+   * 勝利条件を満たしているか？
+   *  yes -> 勝者決定
+   *  no -> 次のターンへ
+   *
+   * @param point プレイヤーの得点
+   */
+  const checkWon = (point: number[]) => {
+    const result = rules.some((array) => {
+      return array.every((value) => {
+        return point.includes(value);
+      });
+    });
+
+    if (result == true) {
+      // 勝者決定
+      changeWon();
+    } else {
+      // ターンの交代
+      changeTurn();
+    }
+  };
+
+  /**
+   *  セルを横一列*3出力する
+   *
+   * @returns React.ClassAttributes<HTMLTableRowElement>[]
+   */
 
   const createBoard = () => {
     const items: React.ClassAttributes<HTMLTableRowElement>[] = [];
     for (let i = 1; i <= 9; i += 3) {
       items.push(
         <tr key={i}>
-          <Cell index={i} turnA={turnA} handleClick={handleClick} />
-          <Cell index={i + 1} turnA={turnA} handleClick={handleClick} />
-          <Cell index={i + 2} turnA={turnA} handleClick={handleClick} />
+          <Cell index={i} handleClick={handleClick} />
+          <Cell index={i + 1} handleClick={handleClick} />
+          <Cell index={i + 2} handleClick={handleClick} />
         </tr>,
       );
     }

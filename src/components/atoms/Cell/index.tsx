@@ -5,28 +5,21 @@ import style from './style';
 
 interface Props {
   index: number;
-  turnA: boolean;
-  handleClick: (element: HTMLTableDataCellElement) => void;
+  handleClick: (
+    setContent: React.Dispatch<React.SetStateAction<string>>,
+    event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>,
+  ) => void;
 }
 
-const Cell: React.FC<Props> = ({ index, turnA, handleClick }) => {
+const Cell: React.FC<Props> = ({ index, handleClick }) => {
   const [content, setContent] = React.useState('');
 
-  const clickCell = (
-    event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>,
-  ) => {
-    const element: HTMLTableDataCellElement = event.target as HTMLTableDataCellElement;
-    if (element.textContent == '') {
-      handleClick(element);
-      if (turnA == true) {
-        setContent('○');
-      } else {
-        setContent('×');
-      }
-    }
-  };
   return (
-    <td data-index={index} css={style} onClick={(event) => clickCell(event)}>
+    <td
+      data-index={index}
+      css={style}
+      onClick={(event) => handleClick(setContent, event)}
+    >
       {content}
     </td>
   );

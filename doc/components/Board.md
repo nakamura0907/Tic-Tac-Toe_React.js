@@ -6,6 +6,8 @@
 
 - handleClick
   - 各セルをクリックで発火する
+- checkWon
+  - 勝利条件の確認
 - createBoard
   - セルの生成
 
@@ -13,8 +15,12 @@
 
 - turnA
   - プレイヤー A のターンかどうか
+- won
+  - 勝利しているかどうか
 - changeTurn
   - ターンを交代する
+- changeWon
+  - 勝敗の決定
 
 ## state
 

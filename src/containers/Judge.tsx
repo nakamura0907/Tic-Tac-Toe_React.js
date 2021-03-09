@@ -4,7 +4,7 @@ import JudgeComponent from 'components/molecules/Judge';
 
 const mapStateToProps = (state: RootStateOrAny) => ({
   turnA: state.tictactoe.turnA,
-  winner: state.tictactoe.winner,
+  won: state.tictactoe.won,
 });
 
 const Judge = connect(mapStateToProps)(JudgeComponent);
