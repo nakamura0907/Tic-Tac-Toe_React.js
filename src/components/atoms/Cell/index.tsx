@@ -7,8 +7,9 @@ interface Props {
   index: number;
   restart: number;
   handleClick: (
+    index: number,
+    content: string,
     setContent: React.Dispatch<React.SetStateAction<string>>,
-    event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>,
   ) => void;
 }
 
@@ -22,11 +23,7 @@ const Cell: React.FC<Props> = ({ index, restart, handleClick }) => {
   }, [restart]);
 
   return (
-    <td
-      data-index={index}
-      css={style}
-      onClick={(event) => handleClick(setContent, event)}
-    >
+    <td css={style} onClick={() => handleClick(index, content, setContent)}>
       {content}
     </td>
   );
