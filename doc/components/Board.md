@@ -4,6 +4,8 @@
 
 ## 関数
 
+- useEffect
+  - 初期化
 - handleClick
   - 各セルをクリックで発火する
 - checkWon
@@ -13,6 +15,8 @@
 
 ## props
 
+- restart
+  - 初期化の検知
 - turnA
   - プレイヤー A のターンかどうか
 - won

@@ -7,6 +7,7 @@ import Cell from 'components/atoms/Cell';
 import rules from './rules';
 
 interface Props {
+  restart: number;
   turnA: boolean;
   won: boolean;
   changeTurn: () => void;
@@ -21,8 +22,20 @@ const initialState: State = {
   points: [[], []],
 };
 
-const Board: React.FC<Props> = ({ turnA, won, changeTurn, changeWon }) => {
+const Board: React.FC<Props> = ({
+  restart,
+  turnA,
+  won,
+  changeTurn,
+  changeWon,
+}) => {
   const [points, setPoints] = React.useState(initialState.points);
+
+  React.useEffect(() => {
+    if (0 < restart) {
+      setPoints(initialState.points);
+    }
+  }, [restart]);
 
   /**
    * 各セルをクリックで発火する
@@ -88,9 +101,9 @@ const Board: React.FC<Props> = ({ turnA, won, changeTurn, changeWon }) => {
     for (let i = 1; i <= 9; i += 3) {
       items.push(
         <tr key={i}>
-          <Cell index={i} handleClick={handleClick} />
-          <Cell index={i + 1} handleClick={handleClick} />
-          <Cell index={i + 2} handleClick={handleClick} />
+          <Cell index={i} restart={restart} handleClick={handleClick} />
+          <Cell index={i + 1} restart={restart} handleClick={handleClick} />
+          <Cell index={i + 2} restart={restart} handleClick={handleClick} />
         </tr>,
       );
     }

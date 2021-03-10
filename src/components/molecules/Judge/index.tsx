@@ -3,9 +3,12 @@
 import React from 'react';
 import style from './style';
 
+import Button from 'components/atoms/Button';
+
 interface Props {
   turnA: boolean;
   won: boolean;
+  newGame: () => void;
 }
 
 interface State {
@@ -16,7 +19,7 @@ const initialState: State = {
   text: '',
 };
 
-const Judge: React.FC<Props> = ({ turnA, won }) => {
+const Judge: React.FC<Props> = ({ turnA, won, newGame }) => {
   const [text, setText] = React.useState(initialState.text);
   React.useEffect(() => {
     if (won == false) {
@@ -33,7 +36,13 @@ const Judge: React.FC<Props> = ({ turnA, won }) => {
       }
     }
   }, [turnA, won]);
-  return <p css={style}>{text}</p>;
+
+  return (
+    <div css={style} className="judge">
+      <p className="judge__text">{text}</p>
+      <Button className="judge__button" handleClick={newGame} text="New Game" />
+    </div>
+  );
 };
 
 export default Judge;

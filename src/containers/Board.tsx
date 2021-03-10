@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 import BoardComponent from 'components/molecules/Board';
 
 const mapStateToProps = (state: RootStateOrAny) => ({
+  restart: state.tictactoe.restart,
   turnA: state.tictactoe.turnA,
   won: state.tictactoe.won,
 });

@@ -4,12 +4,17 @@
 
 ## 関数
 
+- useEffect
+  - 初期化
+
 ## props
 
 - turnA
   - プレイヤー A のターンかどうか
 - winner
   - 勝敗が決まっているかどうか
+- newGame
+  - ゲームのリスタート
 
 ## state
 
