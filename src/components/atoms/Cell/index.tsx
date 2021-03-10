@@ -5,21 +5,25 @@ import style from './style';
 
 interface Props {
   index: number;
+  restart: number;
   handleClick: (
+    index: number,
+    content: string,
     setContent: React.Dispatch<React.SetStateAction<string>>,
-    event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>,
   ) => void;
 }
 
-const Cell: React.FC<Props> = ({ index, handleClick }) => {
+const Cell: React.FC<Props> = ({ index, restart, handleClick }) => {
   const [content, setContent] = React.useState('');
 
+  React.useEffect(() => {
+    if (0 < restart) {
+      setContent('');
+    }
+  }, [restart]);
+
   return (
-    <td
-      data-index={index}
-      css={style}
-      onClick={(event) => handleClick(setContent, event)}
-    >
+    <td css={style} onClick={() => handleClick(index, content, setContent)}>
       {content}
     </td>
   );

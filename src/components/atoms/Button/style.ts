@@ -1,12 +1,9 @@
 import { css } from '@emotion/react';
 
 const style = css`
-  width: 50px;
-  height: 50px;
-  border: 1px solid;
-  text-align: center;
+  width: 120px;
+  height: 40px;
   box-sizing: border-box;
-  cursor: pointer;
 `;
 
 export default style;
