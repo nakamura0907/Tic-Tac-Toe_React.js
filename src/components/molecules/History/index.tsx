@@ -32,20 +32,19 @@ const History: React.FC<Props> = ({ turnA, won }) => {
   const [list, setList] = React.useState(initialState.list);
 
   React.useEffect(() => {
-    if (won == true) {
-      if (turnA == true) {
-        setScore({
-          ...score,
-          playerA: score.playerA + 1,
-        });
-        setList([...list, 'Aの勝ち']);
-      } else {
-        setScore({
-          ...score,
-          playerB: score.playerB + 1,
-        });
-        setList([...list, 'Bの勝ち']);
-      }
+    if (won) {
+      setScore(
+        turnA
+          ? {
+              ...score,
+              playerA: score.playerA + 1,
+            }
+          : {
+              ...score,
+              playerB: score.playerB + 1,
+            },
+      );
+      setList(turnA ? [...list, 'Aの勝ち'] : [...list, 'Bの勝ち']);
     }
   }, [won]);
 
