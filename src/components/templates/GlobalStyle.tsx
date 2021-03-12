@@ -1,5 +1,5 @@
-import React from 'react'
-import { Global, css } from '@emotion/react'
+import React from 'react';
+import { Global, css } from '@emotion/react';
 
 const GlobalStyle: React.FC = () => {
   return (
@@ -20,6 +20,9 @@ const GlobalStyle: React.FC = () => {
         div#root > main.main {
           grid-column: 1/2;
           grid-row: 2/3;
+          width: 80%;
+          max-width: 620px;
+          margin: 0 auto;
         }
         div#root > footer.footer {
           grid-column: 1/2;
@@ -33,7 +36,7 @@ const GlobalStyle: React.FC = () => {
         }
       `}
     />
-  )
-}
+  );
+};
 
-export default GlobalStyle
+export default GlobalStyle;
