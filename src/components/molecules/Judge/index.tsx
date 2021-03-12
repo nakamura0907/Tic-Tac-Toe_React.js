@@ -22,18 +22,10 @@ const initialState: State = {
 const Judge: React.FC<Props> = ({ turnA, won, newGame }) => {
   const [text, setText] = React.useState(initialState.text);
   React.useEffect(() => {
-    if (won == false) {
-      if (turnA == true) {
-        setText('プレイヤーAのターンです');
-      } else {
-        setText('プレイヤーBのターンです');
-      }
+    if (turnA) {
+      setText(won ? 'プレイヤーAの勝ちです' : 'プレイヤーAのターンです');
     } else {
-      if (turnA == true) {
-        setText('プレイヤーAの勝ちです');
-      } else {
-        setText('プレイヤーBの勝ちです');
-      }
+      setText(won ? 'プレイヤーBの勝ちです' : 'プレイヤーBのターンです');
     }
   }, [turnA, won]);
 

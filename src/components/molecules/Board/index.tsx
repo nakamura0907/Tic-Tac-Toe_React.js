@@ -75,7 +75,7 @@ const Board: React.FC<Props> = ({
       });
     });
 
-    if (result == true) {
+    if (result) {
       // 勝者決定
       changeWon();
     } else {
