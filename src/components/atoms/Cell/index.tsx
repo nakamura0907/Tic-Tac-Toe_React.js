@@ -3,7 +3,7 @@
 import React from 'react';
 import style from './style';
 
-interface Props {
+export interface Props {
   index: number;
   restart: number;
   handleClick: (
