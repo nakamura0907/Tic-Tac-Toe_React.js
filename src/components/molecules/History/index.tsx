@@ -48,18 +48,46 @@ const History: React.FC<Props> = ({ turnA, won }) => {
     }
   }, [won]);
 
-  const createList = () => {
-    const array: React.DetailedHTMLProps<
-      React.LiHTMLAttributes<HTMLLIElement>,
-      HTMLLIElement
-    >[] = [];
-    for (let i = 1; i <= list.length; i++) {
-      array.push(<li key={i}>{list[list.length - i]}</li>);
-      if (count <= i) {
-        break;
+  const renderList = () => {
+    return new Array(list.length).fill(0).map((value, index) => {
+      if (count < index + 1) {
+        // break;
+        return;
       }
-    }
-    return array;
+      return <li key={index}>{list[list.length - index - 1]}</li>;
+    });
+  };
+
+  const renderOption = () => {
+    const options = [
+      {
+        value: 3,
+        text: '3',
+      },
+      {
+        value: 5,
+        text: '5',
+      },
+      {
+        value: 10,
+        text: '10',
+      },
+      {
+        value: 0,
+        text: '表示しない',
+      },
+      {
+        value: 99999,
+        text: '全て',
+      },
+    ];
+    return new Array(options.length).fill(0).map((value, index) => {
+      return (
+        <option key={index} value={options[index].value}>
+          {options[index].text}
+        </option>
+      );
+    });
   };
 
   return (
@@ -76,13 +104,10 @@ const History: React.FC<Props> = ({ turnA, won }) => {
             id="count"
             onChange={(e) => setCount(Number(e.target.value))}
           >
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="99999">全て</option>
+            {renderOption()}
           </select>
         </label>
-        <ul>{createList()}</ul>
+        <ul>{renderList()}</ul>
       </div>
     </div>
   );
