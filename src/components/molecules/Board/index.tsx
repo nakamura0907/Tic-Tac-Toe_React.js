@@ -76,7 +76,7 @@ const Board: React.FC<Props> = ({
     });
 
     if (result) {
-      // 勝者決定
+      // 勝者決定 & スコアの更新
       changeWon();
     } else {
       // ターンの交代

@@ -4,12 +4,6 @@ import React from 'react';
 import style from './style';
 
 interface Props {
-  turnA: boolean;
-  won: boolean;
-}
-
-interface State {
-  count: number;
   list: string[];
   score: {
     playerA: number;
@@ -17,36 +11,16 @@ interface State {
   };
 }
 
+interface State {
+  count: number;
+}
+
 const initialState: State = {
   count: 3,
-  list: [],
-  score: {
-    playerA: 0,
-    playerB: 0,
-  },
 };
 
-const History: React.FC<Props> = ({ turnA, won }) => {
+const History: React.FC<Props> = ({ list, score }) => {
   const [count, setCount] = React.useState(initialState.count);
-  const [score, setScore] = React.useState(initialState.score);
-  const [list, setList] = React.useState(initialState.list);
-
-  React.useEffect(() => {
-    if (won) {
-      setScore(
-        turnA
-          ? {
-              ...score,
-              playerA: score.playerA + 1,
-            }
-          : {
-              ...score,
-              playerB: score.playerB + 1,
-            },
-      );
-      setList(turnA ? [...list, 'Aの勝ち'] : [...list, 'Bの勝ち']);
-    }
-  }, [won]);
 
   const renderList = () => {
     return new Array(list.length).fill(0).map((value, index) => {

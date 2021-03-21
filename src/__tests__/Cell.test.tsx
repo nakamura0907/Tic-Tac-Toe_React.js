@@ -3,10 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import Cell, { Props } from 'components/atoms/Cell';
 
-const handleClick = () => {
-  jest.fn();
-  return;
-};
+const handleClick = jest.fn();
 const renderCell = (props: Partial<Props> = {}): any => {
   const defaultProps: Props = {
     index: 0,
@@ -32,9 +29,7 @@ describe('Cell', () => {
     element = container.querySelector('td');
 
     fireEvent.click(element);
-
-    // Matcher error: received value must be a mock or spy function
-    // expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick.mock.calls.length).toBe(1);
     // screen.debug();
   });
 });
