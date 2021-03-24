@@ -6,7 +6,7 @@ interface State {
     playerA: number;
     playerB: number;
   };
-  turnA: boolean;
+  turnA: 'playerA' | 'playerB';
   won: boolean;
   restart: number;
 }
@@ -17,9 +17,14 @@ const initialState: State = {
     playerA: 0,
     playerB: 0,
   },
-  turnA: true,
+  turnA: 'playerA',
   won: false,
   restart: 0,
+};
+
+const messages = {
+  playerA: 'Aの勝ち',
+  playerB: 'Bの勝ち',
 };
 
 export const Actions = createActions({}, 'CHANGE_TURN', 'changeWon', 'newGame');
@@ -28,7 +33,7 @@ const tictactoe = handleActions(
   {
     [Actions.changeTurn.toString()]: (state) => ({
       ...state,
-      turnA: !state.turnA,
+      // turnA: state.turnA === 'playerA' ? 'playerB' : 'playerB',
     }),
     [Actions.changeWon.toString()]: (state) => ({
       ...state,
