@@ -6,7 +6,7 @@ import style from './style';
 import Button from 'components/atoms/Button';
 
 interface Props {
-  turnA: boolean;
+  turn: 'playerA' | 'playerB';
   won: boolean;
   newGame: () => void;
 }
@@ -19,15 +19,15 @@ const initialState: State = {
   text: '',
 };
 
-const Judge: React.FC<Props> = ({ turnA, won, newGame }) => {
+const Judge: React.FC<Props> = ({ turn, won, newGame }) => {
   const [text, setText] = React.useState(initialState.text);
   React.useEffect(() => {
-    if (turnA) {
+    if (turn === 'playerA') {
       setText(won ? 'プレイヤーAの勝ちです' : 'プレイヤーAのターンです');
     } else {
       setText(won ? 'プレイヤーBの勝ちです' : 'プレイヤーBのターンです');
     }
-  }, [turnA, won]);
+  }, [turn, won]);
 
   return (
     <div css={style} className="judge">

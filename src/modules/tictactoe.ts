@@ -6,7 +6,7 @@ interface State {
     playerA: number;
     playerB: number;
   };
-  turnA: 'playerA' | 'playerB';
+  turn: 'playerA' | 'playerB';
   won: boolean;
   restart: number;
 }
@@ -17,7 +17,8 @@ const initialState: State = {
     playerA: 0,
     playerB: 0,
   },
-  turnA: 'playerA',
+  // turn: 'playerA' as 'playerA',  Line 20:23:  Expected a `const` instead of a literal type assertion  @typescript-eslint/prefer-as-const
+  turn: 'playerA' as const,
   won: false,
   restart: 0,
 };
@@ -33,27 +34,18 @@ const tictactoe = handleActions(
   {
     [Actions.changeTurn.toString()]: (state) => ({
       ...state,
-      // turnA: state.turnA === 'playerA' ? 'playerB' : 'playerB',
+      turn:
+        state.turn === 'playerA' ? ('playerB' as const) : ('playerA' as const),
     }),
     [Actions.changeWon.toString()]: (state) => ({
       ...state,
-      list: state.turnA
-        ? [...state.list, 'Aの勝ち']
-        : [...state.list, 'Bの勝ち'],
-      score: state.turnA
-        ? {
-            ...state.score,
-            playerA: state.score.playerA + 1,
-          }
-        : {
-            ...state.score,
-            playerB: state.score.playerB + 1,
-          },
+      list: [...state.list, messages[state.turn]],
+      score: { ...state.score, [state.turn]: state.score[state.turn] + 1 },
       won: true,
     }),
     [Actions.newGame.toString()]: (state) => ({
       ...state,
-      turnA: initialState.turnA,
+      turn: initialState.turn,
       won: initialState.won,
       restart: state.restart + 1,
     }),

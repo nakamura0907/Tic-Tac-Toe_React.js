@@ -6,7 +6,7 @@ import BoardComponent from 'components/molecules/Board';
 
 const mapStateToProps = (state: RootStateOrAny) => ({
   restart: state.tictactoe.restart,
-  turnA: state.tictactoe.turnA,
+  turn: state.tictactoe.turn,
   won: state.tictactoe.won,
 });
 

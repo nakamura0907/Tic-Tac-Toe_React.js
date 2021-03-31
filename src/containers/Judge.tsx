@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import JudgeComponent from 'components/molecules/Judge';
 
 const mapStateToProps = (state: RootStateOrAny) => ({
-  turnA: state.tictactoe.turnA,
+  turn: state.tictactoe.turn,
   won: state.tictactoe.won,
 });
 

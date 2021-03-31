@@ -9,7 +9,6 @@ export const Main: React.FC = () => {
     <main className="main">
       <Judge />
       <Board />
-      {/* <div className="main__options">options</div> */}
       <History />
     </main>
   );
