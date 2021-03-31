@@ -8,7 +8,7 @@ import rules from './rules';
 
 interface Props {
   restart: number;
-  turnA: boolean;
+  turn: 'playerA' | 'playerB';
   won: boolean;
   changeTurn: () => void;
   changeWon: () => void;
@@ -24,7 +24,7 @@ const initialState: State = {
 
 const Board: React.FC<Props> = ({
   restart,
-  turnA,
+  turn,
   won,
   changeTurn,
   changeWon,
@@ -50,8 +50,8 @@ const Board: React.FC<Props> = ({
     setContent: React.Dispatch<React.SetStateAction<string>>,
   ): void => {
     if (content == '' && won == false) {
-      const i: number = turnA ? 0 : 1;
-      setContent(turnA ? '○' : '×');
+      const i: number = turn === 'playerA' ? 0 : 1;
+      setContent(turn === 'playerA' ? '○' : '×');
       // 得点の追加
       const clone = JSON.parse(JSON.stringify(points));
       clone[i].push(index);
